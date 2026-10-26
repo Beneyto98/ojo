@@ -1,0 +1,17 @@
+# Archivos generados
+/target/
+*.class
+*.log
+# Configuracion local de IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+# Credenciales locales
+.env
+.env.*
+!.env.example
+# Sistema operativo
+.DS_Store
+Thumbs.db
