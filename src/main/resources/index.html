@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>OJO — Catálogo</title>
+</head>
+<body>
+<h1>Catálogo de OJO</h1>
+<p id="mensaje">Cargando títulos...</p>
+<ul id="lista"></ul>
+
+<script>
+    async function cargarTitulos() {
+        const mensaje = document.getElementById("mensaje");
+        const lista = document.getElementById("lista");
+
+        try {
+            const respuesta = await fetch("/titulos");
+
+            if (!respuesta.ok) {
+                throw new Error("No se pudo obtener el catálogo.");
+            }
+
+            const titulos = await respuesta.json();
+
+            for (const titulo of titulos) {
+                const elemento = document.createElement("li");
+
+                elemento.textContent =
+                    titulo.nombre + " | " +
+                    titulo.anio + " | " +
+                    titulo.genero;
+
+                lista.appendChild(elemento);
+            }
+
+            mensaje.textContent = "Catálogo cargado.";
+
+        } catch (error) {
+            mensaje.textContent = "Error al cargar los títulos.";
+            console.error(error);
+        }
+    }
+
+    cargarTitulos();
+</script>
+</body>
+</html>
